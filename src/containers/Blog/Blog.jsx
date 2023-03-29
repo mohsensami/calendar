@@ -11,27 +11,33 @@ class Blog extends React.Component {
     state = {
         posts: [],
         selectedPostId: null,
+        error: false,
     };
     componentDidMount() {
-        axios.get('https://jsonplaceholder.typicode.com/posts').then((res) => {
-            const posts = res.data.slice(0, 4);
-            const updatedPosts = posts.map((item) => {
-                return {
-                    ...item,
-                    author: 'Admin',
-                };
-            });
-            this.setState({ posts: updatedPosts });
-        });
+        axios
+            .get('https://jsonplaceholder.typicode.com/posts')
+            .then((res) => {
+                const posts = res.data.slice(0, 4);
+                const updatedPosts = posts.map((item) => {
+                    return {
+                        ...item,
+                        author: 'Admin',
+                    };
+                });
+                this.setState({ posts: updatedPosts });
+            })
+            .catch((err) => this.setState({ error: true }));
     }
     selectedPostHandler = (id) => {
-        console.log(id);
         this.setState({ selectedPostId: id });
     };
     render() {
-        const posts = this.state.posts.map((item) => {
-            return <Post key={item.id} title={item.title} author={item.author} click={() => this.selectedPostHandler(item.id)} />;
-        });
+        let posts = <p>Fetching data failed!</p>;
+        if (!this.state.error) {
+            posts = this.state.posts.map((item) => {
+                return <Post key={item.id} title={item.title} author={item.author} click={() => this.selectedPostHandler(item.id)} />;
+            });
+        }
         return (
             <div>
                 <section className="posts">{posts}</section>
