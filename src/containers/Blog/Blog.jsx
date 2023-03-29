@@ -10,6 +10,7 @@ import './Blog.css';
 class Blog extends React.Component {
     state = {
         posts: [],
+        selectedPostId: null,
     };
     componentDidMount() {
         axios.get('https://jsonplaceholder.typicode.com/posts').then((res) => {
@@ -23,15 +24,19 @@ class Blog extends React.Component {
             this.setState({ posts: updatedPosts });
         });
     }
+    selectedPostHandler = (id) => {
+        console.log(id);
+        this.setState({ selectedPostId: id });
+    };
     render() {
         const posts = this.state.posts.map((item) => {
-            return <Post key={item.id} title={item.title} author={item.author} />;
+            return <Post key={item.id} title={item.title} author={item.author} click={() => this.selectedPostHandler(item.id)} />;
         });
         return (
             <div>
                 <section className="posts">{posts}</section>
                 <section>
-                    <FullPost />
+                    <FullPost id={this.state.selectedPostId} />
                 </section>
                 <section>
                     <NewPost />
