@@ -1,52 +1,34 @@
 import React from 'react';
-import axios from 'axios';
+import { Routes, Route, Link } from 'react-router-dom';
 
-import Post from '../../components/Post/Post';
-import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
+import Posts from './Posts/Posts';
+import NewPost from './NewPost/NewPost';
+import FullPost from './FullPost/FullPost';
 
 import './Blog.css';
 
 class Blog extends React.Component {
-    state = {
-        posts: [],
-        selectedPostId: null,
-        error: false,
-    };
-    componentDidMount() {
-        axios
-            .get('/posts')
-            .then((res) => {
-                const posts = res.data.slice(0, 4);
-                const updatedPosts = posts.map((item) => {
-                    return {
-                        ...item,
-                        author: 'Admin',
-                    };
-                });
-                this.setState({ posts: updatedPosts });
-            })
-            .catch((err) => this.setState({ error: true }));
-    }
-    selectedPostHandler = (id) => {
-        this.setState({ selectedPostId: id });
-    };
     render() {
-        let posts = <p>Fetching data failed!</p>;
-        if (!this.state.error) {
-            posts = this.state.posts.map((item) => {
-                return <Post key={item.id} title={item.title} author={item.author} click={() => this.selectedPostHandler(item.id)} />;
-            });
-        }
         return (
-            <div>
-                <section className="posts">{posts}</section>
-                <section>
-                    <FullPost id={this.state.selectedPostId} />
-                </section>
-                <section>
-                    <NewPost />
-                </section>
+            <div className="blog">
+                <header>
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/new-post">New Post</Link>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
+                <Routes>
+                    <Route exact path="/" element={<Posts />} />
+                    <Route path="/new-post" element={<NewPost />} />
+                    <Route exact path="/:id" element={<FullPost />} />
+                    <Route path="*" element={<h2 style={{ textAlign: 'center' }}>Not Found</h2>} />
+                </Routes>
             </div>
         );
     }

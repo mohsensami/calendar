@@ -1,7 +1,17 @@
-.posts {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  width: 80%;
-  margin: auto;
+.blog ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.blog li {
+    display: inline-block;
+    margin: 20px;
+}
+
+.blog a {
+    text-decoration: none;
+    color: #9c27b0;
 }
