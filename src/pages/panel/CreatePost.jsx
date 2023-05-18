@@ -1,5 +1,5 @@
 const createPost = () => {
-    return <div>createPost</div>;
+    return <h1>createPost</h1>;
 };
 
 export default createPost;
