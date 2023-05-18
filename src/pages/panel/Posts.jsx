@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '../../redux/features/postSlice';
-import { Button, Card, CardActions, CardContent, CardMedia, Typography, Grid, Container } from '@mui/material';
+import { Container, TableContainer, Table, TableHead, TableCell, TableBody, TableRow, Paper } from '@mui/material';
 // import LoadingCard from './LoadingCard';
 
 const Home = () => {
@@ -14,43 +14,33 @@ const Home = () => {
     }, []);
 
     return (
-        <Container maxWidth="xl">
-            <h1 style={{ textAlign: 'center' }}>Fetch Post</h1>
-
-            <br />
-            <br />
-            {loading ? (
-                // <LoadingCard count={1} />
-                <p>Loading</p>
-            ) : (
-                <>
-                    {posts.length > 0 && (
-                        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                            {posts.map((item) => {
-                                return (
-                                    <Grid key={item.id} item xs={4}>
-                                        <Card>
-                                            {/* <CardMedia sx={{ height: 140 }} image="" title="green iguana" /> */}
-                                            <CardContent>
-                                                <Typography gutterBottom variant="h5" component="div">
-                                                    {item.title}
-                                                </Typography>
-                                                <Typography variant="body2" color="text.secondary">
-                                                    {item.body}
-                                                </Typography>
-                                            </CardContent>
-                                            <CardActions>
-                                                <Button size="small">Share</Button>
-                                                <Button size="small">Learn More</Button>
-                                            </CardActions>
-                                        </Card>
-                                    </Grid>
-                                );
-                            })}
-                        </Grid>
-                    )}
-                </>
-            )}
+        <Container maxWidth="xl" sx={{ marginTop: 2 }}>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>#</TableCell>
+                            <TableCell>Title</TableCell>
+                            <TableCell>Body</TableCell>
+                            <TableCell>User</TableCell>
+                            <TableCell>Actions</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {posts.map((row) => (
+                            <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                <TableCell component="th" scope="row">
+                                    {row.id}
+                                </TableCell>
+                                <TableCell>{row.title}</TableCell>
+                                <TableCell>{row.body.slice(0, 50)} ...</TableCell>
+                                <TableCell>{row.userId}</TableCell>
+                                <TableCell>--</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </Container>
     );
 };
