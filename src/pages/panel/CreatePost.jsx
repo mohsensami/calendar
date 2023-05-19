@@ -29,10 +29,7 @@ const CreatePost = () => {
                     <p>Loading</p>
                 ) : (
                     <div className="site-card-border-less-wrapper">
-                        {/* <Card type="inner" title={post[0].title}>
-                            <p>User ID: {post[0].id}</p>
-                            <span>{post[0].body}</span>
-                        </Card> */}
+                        {post[0].id} -- {post[0].body}
                     </div>
                 )}
             </>
@@ -60,15 +57,12 @@ const CreatePost = () => {
                 />
                 <br />
                 <br />
+                <Button onClick={() => navigate('/panel')} variant="outlined">
+                    Go Back
+                </Button>
                 <Button type="submit" variant="outlined">
                     Submit
                 </Button>
-                {/* <Space style={{ margin: 10 }}>
-                    <Button onClick={() => navigate('/')}>Go Back</Button>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Space> */}
             </form>
             <br />
             <br />

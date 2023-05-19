@@ -34,54 +34,54 @@ const postSlice = createSlice({
         loading: false,
         error: null,
     },
-    extraReducers: {
-        [getPost.pending]: (state, action) => {
-            state.loading = true;
-        },
-        [getPost.fulfilled]: (state, action) => {
-            state.loading = false;
-            state.post = [action.payload][0];
-        },
-        [getPost.rejected]: (state, action) => {
-            state.loading = false;
-            state.erorr = action.payload;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getPost.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(getPost.fulfilled, (state, action) => {
+                state.loading = false;
+                state.post = [action.payload][0];
+            })
+            .addCase(getPost.rejected, (state, action) => {
+                state.loading = false;
+                state.erorr = action.payload;
+            })
 
-        [getPosts.pending]: (state, action) => {
-            state.loading = true;
-        },
-        [getPosts.fulfilled]: (state, action) => {
-            state.loading = false;
-            state.posts = [action.payload][0];
-        },
-        [getPosts.rejected]: (state, action) => {
-            state.loading = false;
-            state.erorr = action.payload;
-        },
+            .addCase(getPosts.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(getPosts.fulfilled, (state, action) => {
+                state.loading = false;
+                state.posts = [action.payload][0];
+            })
+            .addCase(getPosts.rejected, (state, action) => {
+                state.loading = false;
+                state.erorr = action.payload;
+            })
 
-        [deletePost.pending]: (state, action) => {
-            state.loading = true;
-        },
-        [deletePost.fulfilled]: (state, action) => {
-            state.loading = false;
-            state.post = action.payload;
-        },
-        [deletePost.rejected]: (state, action) => {
-            state.loading = false;
-            state.erorr = action.payload;
-        },
-
-        [createPost.pending]: (state, action) => {
-            state.loading = true;
-        },
-        [createPost.fulfilled]: (state, action) => {
-            state.loading = false;
-            state.post = [action.payload];
-        },
-        [createPost.rejected]: (state, action) => {
-            state.loading = false;
-            state.erorr = action.payload;
-        },
+            .addCase(deletePost.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(deletePost.fulfilled, (state, action) => {
+                state.loading = false;
+                state.post = action.payload;
+            })
+            .addCase(deletePost.rejected, (state, action) => {
+                state.loading = false;
+                state.erorr = action.payload;
+            })
+            .addCase(createPost.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(createPost.fulfilled, (state, action) => {
+                state.loading = false;
+                state.post = [action.payload];
+            })
+            .addCase(createPost.rejected, (state, action) => {
+                state.loading = false;
+                state.erorr = action.payload;
+            });
     },
 });
 

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts, deletePost } from '../../redux/features/postSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     Container,
     TableContainer,
@@ -16,9 +16,9 @@ import {
 // import LoadingCard from './LoadingCard';
 
 const Home = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { loading, posts } = useSelector((state) => ({ ...state.app }));
-    console.log('post', posts);
 
     useEffect(() => {
         dispatch(getPosts());
@@ -34,8 +34,8 @@ const Home = () => {
 
     return (
         <Container maxWidth="xl" sx={{ marginTop: 2, marginBottom: 2 }}>
-            <Button variant="contained">
-                <Link to="#">Create</Link>
+            <Button onClick={() => navigate('/panel/create-post')} variant="contained">
+                Create
             </Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -50,7 +50,7 @@ const Home = () => {
                     </TableHead>
                     <TableBody>
                         {posts.map((row) => (
-                            <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                            <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell component="th" scope="row">
                                     {row.id}
                                 </TableCell>
