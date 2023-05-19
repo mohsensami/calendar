@@ -1,7 +1,18 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPosts } from '../../redux/features/postSlice';
-import { Container, TableContainer, Table, TableHead, TableCell, TableBody, TableRow, Paper } from '@mui/material';
+import { getPosts, deletePost } from '../../redux/features/postSlice';
+import { Link } from 'react-router-dom';
+import {
+    Container,
+    TableContainer,
+    Table,
+    TableHead,
+    TableCell,
+    TableBody,
+    TableRow,
+    Paper,
+    Button,
+} from '@mui/material';
 // import LoadingCard from './LoadingCard';
 
 const Home = () => {
@@ -13,8 +24,19 @@ const Home = () => {
         dispatch(getPosts());
     }, []);
 
+    if (loading) {
+        return (
+            <div>
+                <span>Loading ...</span>
+            </div>
+        );
+    }
+
     return (
-        <Container maxWidth="xl" sx={{ marginTop: 2 }}>
+        <Container maxWidth="xl" sx={{ marginTop: 2, marginBottom: 2 }}>
+            <Button variant="contained">
+                <Link to="#">Create</Link>
+            </Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -32,10 +54,21 @@ const Home = () => {
                                 <TableCell component="th" scope="row">
                                     {row.id}
                                 </TableCell>
-                                <TableCell>{row.title}</TableCell>
-                                <TableCell>{row.body.slice(0, 50)} ...</TableCell>
+                                <TableCell>
+                                    <Link to={`${row.id}`}>{row.title}</Link>
+                                </TableCell>
+                                <TableCell>{row.body} ...</TableCell>
                                 <TableCell>{row.userId}</TableCell>
-                                <TableCell>--</TableCell>
+                                <TableCell>
+                                    <Link
+                                        to="#"
+                                        onClick={() => dispatch(deletePost({ id: row.id }))}
+                                        size="small"
+                                        color="error"
+                                    >
+                                        Delete
+                                    </Link>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

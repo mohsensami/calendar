@@ -8,6 +8,10 @@ export const getPosts = createAsyncThunk('post/getPosts', async () => {
     return fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json());
 });
 
+export const deletePost = createAsyncThunk('post/deletePost', async ({ id }) => {
+    return fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, { method: 'DELETE' }).then((res) => res.json());
+});
+
 const postSlice = createSlice({
     name: 'post',
     initialState: {
@@ -22,7 +26,7 @@ const postSlice = createSlice({
         },
         [getPost.fulfilled]: (state, action) => {
             state.loading = false;
-            state.post = [action.payload];
+            state.post = [action.payload][0];
         },
         [getPost.rejected]: (state, action) => {
             state.loading = false;
@@ -37,6 +41,18 @@ const postSlice = createSlice({
             state.posts = [action.payload][0];
         },
         [getPosts.rejected]: (state, action) => {
+            state.loading = false;
+            state.erorr = action.payload;
+        },
+
+        [deletePost.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [deletePost.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.post = action.payload;
+        },
+        [deletePost.rejected]: (state, action) => {
             state.loading = false;
             state.erorr = action.payload;
         },
