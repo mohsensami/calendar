@@ -26,6 +26,20 @@ export const createPost = createAsyncThunk('post/createPost', async ({ values })
     }).then((res) => res.json());
 });
 
+export const updatePost = createAsyncThunk('post/updatePost', async ({ id, body, title }) => {
+    return fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            title,
+            body,
+        }),
+    }).then((res) => res.json());
+});
+
 const postSlice = createSlice({
     name: 'post',
     initialState: {
@@ -33,7 +47,18 @@ const postSlice = createSlice({
         post: [],
         loading: false,
         error: null,
+        body: '',
+        title: '',
+        edit: false,
     },
+
+    reducers: {
+        setEdit: (state, action) => {
+            state.edit = action.payload.edit;
+            state.body = action.payload.body;
+        },
+    },
+
     extraReducers: (builder) => {
         builder
             .addCase(getPost.pending, (state, action) => {
@@ -71,6 +96,7 @@ const postSlice = createSlice({
                 state.loading = false;
                 state.erorr = action.payload;
             })
+
             .addCase(createPost.pending, (state, action) => {
                 state.loading = true;
             })
@@ -81,8 +107,22 @@ const postSlice = createSlice({
             .addCase(createPost.rejected, (state, action) => {
                 state.loading = false;
                 state.erorr = action.payload;
+            })
+
+            .addCase(updatePost.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(updatePost.fulfilled, (state, action) => {
+                state.loading = false;
+                state.post = [action.payload];
+            })
+            .addCase(updatePost.rejected, (state, action) => {
+                state.loading = false;
+                state.erorr = action.payload;
             });
     },
 });
+
+export const { setEdit } = postSlice.actions;
 
 export default postSlice.reducer;

@@ -12,6 +12,7 @@ import {
     TableRow,
     Paper,
     Button,
+    CircularProgress,
 } from '@mui/material';
 // import LoadingCard from './LoadingCard';
 
@@ -27,7 +28,9 @@ const Home = () => {
     if (loading) {
         return (
             <div>
-                <span>Loading ...</span>
+                <span>
+                    <CircularProgress />
+                </span>
             </div>
         );
     }
