@@ -14,7 +14,8 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
+import { Link, useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { getPosts, deletePost } from "../../redux/features/postSlice";
@@ -128,7 +129,8 @@ export default function Album() {
                       // 16:9
                       pt: "56.25%",
                     }}
-                    image={`https://picsum.photos/id/${post.id}/400/300`}
+                    // image={`https://picsum.photos/id/${post.id}/400/300`}
+                    image={``}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -137,7 +139,9 @@ export default function Album() {
                     <Typography>{post.body}</Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">View</Button>
+                    <Button component={Link} to={`${post.id}`} size="small">
+                      View
+                    </Button>
                     <Button size="small">Edit</Button>
                   </CardActions>
                 </Card>
