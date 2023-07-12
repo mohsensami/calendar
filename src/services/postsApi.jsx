@@ -45,4 +45,5 @@ export const {
   usePostQuery,
   useDeletePostMutation,
   useAddPostMutation,
+  useUpdatePostMutation,
 } = postsApi;

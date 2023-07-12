@@ -26,6 +26,7 @@ const Single = () => {
       </div>
       <div>
         <button onClick={() => handleDelete(post.id)}>delete</button>
+        <Link to={`/edit/${post.id}`}>Edit</Link>
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "Title 1",
-      "body": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate repellendus, amet reprehenderit nemo corporis eveniet veniam sit quas atque, temporibus enim ab adipisci eius asperiores, cupiditate officia obcaecati accusamus! Sit!"
+      "title": "Title one",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate repellendus, amet reprehenderit nemo corporis eveniet veniam sit quas atque, temporibus enim ab adipisci eius asperiores, cupiditate officia obcaecati accusamus! Sit!",
+      "id": 1
     },
     {
       "id": 2,
@@ -24,6 +24,11 @@
       "title": "Thtle5",
       "body": "My lorem ipsum",
       "id": 5
+    },
+    {
+      "title": "Thtle5",
+      "body": "My lorem ipsum",
+      "id": 6
     }
   ]
 }
