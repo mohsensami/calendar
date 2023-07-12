@@ -40,4 +40,4 @@ export const postsApi = createApi({
   }),
 });
 
-export const { usePostsQuery, usePostQuery } = postsApi;
+export const { usePostsQuery, usePostQuery, useDeletePostMutation } = postsApi;

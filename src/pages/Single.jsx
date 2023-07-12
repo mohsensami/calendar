@@ -1,12 +1,34 @@
 import { useParams, Link } from "react-router-dom";
-import { usePostQuery } from "../services/postsApi";
+import { usePostQuery, useDeletePostMutation } from "../services/postsApi";
+import Spinner from "../components/Spinner";
 
 const Single = () => {
   const { id } = useParams();
-  const { data, isLoading, error } = usePostQuery(id);
-  console.log(data);
+  const { data: post, isLoading, error } = usePostQuery(id);
+  const [deleteContact] = useDeletePostMutation();
+  console.log(post);
 
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure that you wanted to delete that Post ?")) {
+      await deleteContact(id);
+      alert("Post Deleted Successfully");
+    }
+  };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  return (
+    <div>
+      <div>
+        <h1 className="">{post.title}</h1>
+      </div>
+      <div>
+        <button onClick={() => handleDelete(post.id)}>delete</button>
+      </div>
+    </div>
+  );
 };
 
 export default Single;
