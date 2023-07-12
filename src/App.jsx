@@ -1,11 +1,9 @@
 import "./App.css";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Header } from "./components/Header";
-import PostsPanel from "./pages/panel/Posts";
-import Home from "./pages/front/Home";
-import Single from "./pages/front/Single";
-import SinglePost from "./pages/panel/SinglePost";
-import CreatePost from "./pages/panel/createPost";
+
+import Home from "./pages/Home";
+import Single from "./pages/Single";
 
 function App() {
   return (
@@ -16,9 +14,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/:id" element={<Single />} />
-            <Route path="panel" element={<PostsPanel />} />
-            <Route path="panel/:id" element={<SinglePost />} />
-            <Route path="panel/create-post" element={<CreatePost />} />
           </Routes>
         </div>
       </BrowserRouter>
