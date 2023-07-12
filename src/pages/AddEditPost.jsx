@@ -5,6 +5,7 @@ import {
   useAddPostMutation,
   useUpdatePostMutation,
 } from "../services/postsApi";
+import Container from "../Container/Container";
 
 const AddEditPost = () => {
   const [formValues, setFormValues] = useState({ title: "", body: "" });
@@ -12,8 +13,10 @@ const AddEditPost = () => {
   const [updatePost] = useUpdatePostMutation();
   const [editMode, setEditMode] = useState(false);
 
+  const navigate = useNavigate();
+
   const { id } = useParams();
-  const { data, error } = usePostQuery(id);
+  const { data: post, error } = usePostQuery(id);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,16 +41,16 @@ const AddEditPost = () => {
   useEffect(() => {
     if (id) {
       setEditMode(true);
-      if (data) {
-        setFormValues({ ...data });
+      if (post) {
+        setFormValues({ ...post });
       }
     } else {
       setEditMode(false);
-      setFormValues({ ...initialState });
+      // setFormValues({ ...formValues });
     }
-  }, [id, data]);
+  }, [id, post]);
   return (
-    <div>
+    <Container>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label>
@@ -69,10 +72,14 @@ const AddEditPost = () => {
               className="border border-gray-200"
             ></textarea>
           </label>
-          <input type="submit" value={editMode ? "Update" : "Add"} />
+          <input
+            className="bg-green-500 text-white px-4 py-2 cursor-pointer"
+            type="submit"
+            value={editMode ? "Update" : "Add"}
+          />
         </div>
       </form>
-    </div>
+    </Container>
   );
 };
 
