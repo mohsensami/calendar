@@ -61,7 +61,7 @@ const postSlice = createSlice({
 
     extraReducers: (builder) => {
         builder
-            .addCase(getPost.pending, (state, action) => {
+            .addCase(getPost.pending, (state) => {
                 state.loading = true;
             })
             .addCase(getPost.fulfilled, (state, action) => {
@@ -73,7 +73,7 @@ const postSlice = createSlice({
                 state.erorr = action.payload;
             })
 
-            .addCase(getPosts.pending, (state, action) => {
+            .addCase(getPosts.pending, (state) => {
                 state.loading = true;
             })
             .addCase(getPosts.fulfilled, (state, action) => {
@@ -85,7 +85,7 @@ const postSlice = createSlice({
                 state.erorr = action.payload;
             })
 
-            .addCase(deletePost.pending, (state, action) => {
+            .addCase(deletePost.pending, (state) => {
                 state.loading = true;
             })
             .addCase(deletePost.fulfilled, (state, action) => {
@@ -97,7 +97,7 @@ const postSlice = createSlice({
                 state.erorr = action.payload;
             })
 
-            .addCase(createPost.pending, (state, action) => {
+            .addCase(createPost.pending, (state) => {
                 state.loading = true;
             })
             .addCase(createPost.fulfilled, (state, action) => {
@@ -109,7 +109,7 @@ const postSlice = createSlice({
                 state.erorr = action.payload;
             })
 
-            .addCase(updatePost.pending, (state, action) => {
+            .addCase(updatePost.pending, (state) => {
                 state.loading = true;
             })
             .addCase(updatePost.fulfilled, (state, action) => {
