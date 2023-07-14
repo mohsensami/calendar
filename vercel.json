@@ -1,9 +1,14 @@
 {
-    "routes": [{ "src": "/api/.*", "dest": "/api/db.json" }],
-    "build": {
-        "env": {
-            "PORT": "5000"
-        },
-        "command": "json-server --watch db.json"
-    }
+    "functions": {
+        "api/server.js": {
+            "memory": 1024,
+            "includeFiles": "db.json"
+        }
+    },
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "api/server.js"
+        }
+    ]
 }
