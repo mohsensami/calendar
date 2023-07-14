@@ -1,0 +1,9 @@
+{
+    "routes": [{ "src": "/api/.*", "dest": "/api/db.json" }],
+    "build": {
+        "env": {
+            "PORT": "5000"
+        },
+        "command": "json-server --watch db.json"
+    }
+}
