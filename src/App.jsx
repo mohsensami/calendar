@@ -1,23 +1,9 @@
 import './App.css';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-
-import Home from './pages/Home';
-import Single from './pages/Single';
-import AddEditPost from './pages/AddEditPost';
 
 function App() {
     return (
         <>
-            <BrowserRouter>
-                <div className="App">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/:id" element={<Single />} />
-                        <Route path="/create" element={<AddEditPost />} />
-                        <Route path="/edit/:id" element={<AddEditPost />} />
-                    </Routes>
-                </div>
-            </BrowserRouter>
+            <h1 className="text-3xl font-bold underline">Hello world!</h1>
         </>
     );
 }
