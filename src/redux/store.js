@@ -4,7 +4,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 
 export const store = configureStore({
     reducer: {
-        [blogsApi.reducer]: blogsApi.reducer,
+        [blogsApi.reducerPath]: blogsApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(blogsApi.middleware),
 });

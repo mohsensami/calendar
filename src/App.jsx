@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
-import About from './pages/About';
+import AddEditBlog from './pages/AddEditBlog';
 import Layout from './components/Layout';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
                     <Routes>
                         {/* <Route path="*" element={<NotFound />} /> */}
                         <Route path="/" element={<Home />} />
-                        <Route path="/about" element={<About />} />
+                        <Route path="/create" element={<AddEditBlog />} />
                     </Routes>
                 </div>
             </Layout>
