@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useDeleteBlogMutation, useFetchBlogsQuery } from '../../redux/services/blogsApi';
 
 const Home = () => {
@@ -16,7 +17,9 @@ const Home = () => {
         <div>
             {data.map((item) => (
                 <div key={item.id}>
-                    <h1>{item.title}</h1>
+                    <h1>
+                        <Link to={`/single/${item.id}`}>{item.title}</Link>
+                    </h1>
                     <button onClick={() => handleDelete(item.id)}>Delete</button>
                 </div>
             ))}

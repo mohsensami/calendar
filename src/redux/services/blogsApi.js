@@ -1,5 +1,5 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
-import { addDoc, collection, deleteDoc, doc, getDocs, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 export const blogsApi = createApi({
@@ -20,6 +20,18 @@ export const blogsApi = createApi({
                         });
                     });
                     return { data: blogs };
+                } catch (err) {
+                    return { error: err };
+                }
+            },
+            providesTags: ['Blog'],
+        }),
+        fetchBlog: builder.query({
+            async queryFn(id) {
+                try {
+                    const docRef = doc(db, 'blogs', id);
+                    const snapshot = await getDoc(docRef);
+                    return { data: snapshot.data() };
                 } catch (err) {
                     return { error: err };
                 }
@@ -54,4 +66,4 @@ export const blogsApi = createApi({
     }),
 });
 
-export const { useFetchBlogsQuery, useAddBlogMutation, useDeleteBlogMutation } = blogsApi;
+export const { useFetchBlogsQuery, useAddBlogMutation, useDeleteBlogMutation, useFetchBlogQuery } = blogsApi;
