@@ -21,6 +21,7 @@ const Home = () => {
                         <Link to={`/single/${item.id}`}>{item.title}</Link>
                     </h1>
                     <button onClick={() => handleDelete(item.id)}>Delete</button>
+                    <Link to={`/update/${item.id}`}>Update</Link>
                 </div>
             ))}
         </div>

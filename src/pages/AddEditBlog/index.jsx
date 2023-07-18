@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { db, storage } from '../../firebase';
-import { useAddBlogMutation } from '../../redux/services/blogsApi';
-import { useNavigate } from 'react-router-dom';
+import { useAddBlogMutation, useFetchBlogQuery, useUpdateBlogMutation } from '../../redux/services/blogsApi';
+import { useNavigate, useParams } from 'react-router-dom';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 const initialState = {
     title: '',
@@ -16,6 +17,15 @@ const AddEditBlog = () => {
     const [progress, setProgress] = useState(null);
     const [addBlog] = useAddBlogMutation();
     const navigate = useNavigate();
+    const { id } = useParams();
+    const { data: blog } = useFetchBlogQuery(id ? id : skipToken);
+    const [updateBlog] = useUpdateBlogMutation();
+
+    useEffect(() => {
+        if (id && blog) {
+            setData({ ...blog });
+        }
+    }, [id, blog]);
 
     useEffect(() => {
         const uploadFile = () => {
@@ -60,8 +70,15 @@ const AddEditBlog = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (title && description) {
-            await addBlog(data);
-            navigate('/');
+            if (!id) {
+                await addBlog(data);
+                navigate('/');
+                alert('Blog added Successfully');
+            } else {
+                await updateBlog({ id, data });
+                navigate('/');
+                alert('Blog updated Successfully');
+            }
         } else {
             alert('All fields are mandatory to fill');
         }
