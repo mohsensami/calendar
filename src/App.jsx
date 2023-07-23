@@ -1,26 +1,14 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
-import Home from './pages/Home';
-import AddEditBlog from './pages/AddEditBlog';
-import Single from './pages/Single';
-import Layout from './components/Layout';
+import "./App.css";
+import Blog from "./containers/Blog";
+import { Provider } from "react-redux";
+import { store } from "./redux/store.js";
 
 function App() {
-    return (
-        <BrowserRouter>
-            <Layout>
-                <div className="App">
-                    <Routes>
-                        {/* <Route path="*" element={<NotFound />} /> */}
-                        <Route path="/" element={<Home />} />
-                        <Route path="/create" element={<AddEditBlog />} />
-                        <Route path="/update/:id" element={<AddEditBlog />} />
-                        <Route path="/single/:id" element={<Single />} />
-                    </Routes>
-                </div>
-            </Layout>
-        </BrowserRouter>
-    );
+  return (
+    <Provider store={store}>
+      <Blog />;
+    </Provider>
+  );
 }
 
 export default App;
