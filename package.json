@@ -1,14 +1,14 @@
 {
     "name": "@mohsensami/react-hook-form",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "private": false,
     "description": "A customizable React hook for forms.",
-    "main": "./dist/react-hook-forms.umd.js",
-    "module": "./dist/react-hook-forms.es.js",
+    "main": "./dist/react-form.umd.js",
+    "module": "./dist/react-form.es.js",
     "types": "dist/index.d.ts",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/mohsensami/react-hook-form"
+        "url": "git+https://github.com/mohsensami/react-form"
     },
     "exports": {
         ".": {
@@ -26,7 +26,8 @@
     },
     "keywords": [
         "react",
-        "form"
+        "form",
+        "hook"
     ],
     "author": "Mohsen Sami",
     "license": "MIT",
