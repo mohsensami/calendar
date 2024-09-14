@@ -1,5 +1,5 @@
 import { useForm } from './lib';
-import { requiredValidator, minValidator, maxValidator } from './lib/validators/rules';
+import { requiredValidator, minValidator, maxValidator, emailValidator } from './lib/validators/rules';
 import Input from './lib/components/Input.js';
 
 import './App.css';
@@ -29,7 +29,7 @@ const App: React.FC = () => {
                         type="text"
                         placeholder="نام کاربری یا آدرس ایمیل"
                         element="input"
-                        validations={[requiredValidator(), minValidator(8), maxValidator(20)]}
+                        validations={[requiredValidator(), minValidator(8), maxValidator(20), emailValidator()]}
                         onInputHandler={onInputHandler}
                     />
                     <i className="login-form__username-icon fa fa-user"></i>

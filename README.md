@@ -20,7 +20,12 @@ React Component:
 
 ```javascript
 import { useForm } from '@mohsensami/react-hook-form';
-import { requiredValidator, minValidator, maxValidator } from '@mohsensami/react-hook-form/validators/rules';
+import {
+    requiredValidator,
+    minValidator,
+    maxValidator,
+    emailValidator,
+} from '@mohsensami/react-hook-form/validators/rules';
 import Input from '@mohsensami/react-hook-form/components/Input.js';
 
 const [formState, onInputHandler] = useForm(
@@ -46,7 +51,7 @@ return (
                 type="text"
                 placeholder="Username"
                 element="input"
-                validations={[requiredValidator(), minValidator(8), maxValidator(20)]}
+                validations={[requiredValidator(), minValidator(8), maxValidator(20), emailValidator()]}
                 onInputHandler={onInputHandler}
             />
             <i className="login-form__username-icon fa fa-user"></i>

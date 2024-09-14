@@ -1,5 +1,5 @@
 {
-    "name": "@mohsensami/react-hook-form",
+    "name": "@mohsensami/react-form",
     "version": "1.0.1",
     "private": false,
     "description": "A customizable React hook for forms.",
